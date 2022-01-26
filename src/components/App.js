@@ -14,7 +14,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
-    <Container>
+    <div>
       <NavBar />
       <Switch>
         <Route exact path='/home'>
@@ -36,7 +36,7 @@ function App() {
           <Replied />
         </Route>
       </Switch>
-    </Container>
+    </div>
   );
 }
 
