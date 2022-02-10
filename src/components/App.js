@@ -9,10 +9,20 @@ import Replied from './Replied';
 import { Route, Switch } from 'react-router-dom';
 
 // react-bootstrap imports
-import { Button, Container } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+// useState import
+import { useEffect, useState } from 'react';
+
+
 function App() {
+
+  const [jobs, setJobs] = useState([]);
+
+  function handleFetch(jobs){
+    setJobs(jobs);
+  }
+
   return (
     <div>
       <NavBar />
@@ -23,7 +33,7 @@ function App() {
       </Switch>
       <Switch>
         <Route exact path='/wishlist'>
-          <Wishlist />
+          <Wishlist jobs={jobs} onFetch={handleFetch}/>
         </Route>
       </Switch>
       <Switch>
