@@ -1,20 +1,17 @@
-import {React, useEffect } from 'react';
+import { React } from 'react';
 import JobItem from './JobItem'; 
 import { Container, Stack, Spinner } from 'react-bootstrap'; 
 
-function Wishlist({ jobs, onFetch }) {
-    useEffect(() => {
-        fetch('http://localhost:3000/jobs')
-        .then(response => response.json())
-        .then(result => {onFetch(result); console.log(result)});
-    }, [])
+function Wishlist({ jobs, onApply }) {
+
     if(jobs) return (
         <Container>
         <Stack gap={3}>
            {jobs.map((job)=> {
                if (!job.applied){
-               return <JobItem job={job} key={job.id} />
-               } 
+               return <JobItem job={job} key={job.id} onApply={onApply} />
+            }
+            return null;  
         })}
         </Stack>
         </Container>

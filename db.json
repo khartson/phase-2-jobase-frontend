@@ -7,8 +7,14 @@
       "location": "Solon, OH",
       "companySite": "https://recruiting.ultipro.com/FIN1005FIND/JobBoard/4e507fe9-0f08-49ad-af9d-096b90a0e90b/OpportunityDetail?opportunityId=845f76ba-30d1-4cdb-ac29-484a143a6002",
       "contactLink": "https://www.linkedin.com/in/matthewbenzel",
-      "technologies": ["python", "django", "react", "API", "SQL"],
-      "applied": false,
+      "technologies": [
+        "python",
+        "django",
+        "react",
+        "API",
+        "SQL"
+      ],
+      "applied": true,
       "replied": false
     },
     {
@@ -18,7 +24,29 @@
       "location": "NYC, NY",
       "companySite": "https://recruiting.ultipro.com/FIN1005FIND/JobBoard/4e507fe9-0f08-49ad-af9d-096b90a0e90b/OpportunityDetail?opportunityId=845f76ba-30d1-4cdb-ac29-484a143a6002",
       "contactLink": "https://www.linkedin.com/in/matthewbenzel",
-      "technologies": ["HTML/CSS", "react", "API", "SQL"],
+      "technologies": [
+        "HTML/CSS",
+        "react",
+        "API",
+        "SQL"
+      ],
+      "applied": true,
+      "replied": false
+    },
+    {
+      "id": 3,
+      "title": "Lead Developer",
+      "company": "ByThePixel",
+      "location": "Denver, CO",
+      "companySite": "https://recruiting.ultipro.com/FIN1005FIND/JobBoard/4e507fe9-0f08-49ad-af9d-096b90a0e90b/OpportunityDetail?opportunityId=845f76ba-30d1-4cdb-ac29-484a143a6002https://bythepixel.com/contact",
+      "contactLink": "https://www.linkedin.com/in/turnerwalters",
+      "technologies": [
+        "HTML/CSS",
+        "react",
+        "API",
+        "SQL",
+        "Python"
+      ],
       "applied": true,
       "replied": true
     }

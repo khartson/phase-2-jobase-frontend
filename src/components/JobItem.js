@@ -2,7 +2,30 @@ import React from 'react';
 import { Card, Button, Container, Row, Col, Badge } from 'react-bootstrap';
 import { RiDeleteBackLine, RiLinkedinBoxFill } from 'react-icons/ri';
 import { FcCheckmark } from "react-icons/fc";
-function JobItem({ job }) {
+function JobItem({ job, onApply }) {
+    
+    // onApply - patch to change applied value, set state false -> true
+    function handleApplyClick(job) {
+        fetch(`http://localhost:3000/jobs/${job.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': "application/json"
+            },
+            body: JSON.stringify({'applied': true}),
+        })
+            .then((r)=>r.json())
+            .then(onApply(job));
+    }
+
+    // onReply - patch to change replied value, set state false -> true
+    function onReply(job) {
+        console.log(job.id); 
+    }
+
+    // onDelete - remove from state & db
+    function onDelete(job) {
+        console.log(job.id); 
+    }
 
     return (
         <Card >
@@ -24,10 +47,13 @@ function JobItem({ job }) {
                             })}
                         </Col>
                         <Col xs='auto'>
-                            <Button disabled={job.applied} size='sm' variant='outline-primary' onClick={() => console.log(job.id)}><FcCheckmark /> {job.applied ? "Applied": "Apply"}</Button>
+                            <Button disabled={job.applied} size='sm' variant='outline-primary' onClick={()=>handleApplyClick(job)}><FcCheckmark /> {job.applied ? "Applied": "Apply"}</Button>
+                        </Col>
+                        <Col xs='4'>
+                            <Button disabled={job.replied || !job.applied} size='sm' variant='outline-primary' onClick={() => onReply(job)}><FcCheckmark /> {job.replied ? "Replied": "Received Reply?"}</Button>
                         </Col>
                         <Col xs='auto'>
-                            <Button disabled={job.replied || !job.applied} size='sm' variant='outline-primary' onClick={() => console.log(job.id)}><FcCheckmark /> {job.replied ? "Replied": "Received Reply?"}</Button>
+                            <Button className='float-right' variant="outline-secondary" onClick={()=> onDelete(job)} ><RiDeleteBackLine/></Button>
                         </Col>
                     </Row>
                 </Container>

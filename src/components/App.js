@@ -17,12 +17,27 @@ import { useEffect, useState } from 'react';
 
 function App() {
 
+  // state declaration
   const [jobs, setJobs] = useState([]);
 
-  function handleFetch(jobs){
-    setJobs(jobs);
-  }
+  // fetch call for databased job applications
+  useEffect(() => {
+      fetch('http://localhost:3000/jobs')
+      .then(response => response.json())
+      .then(result => {setJobs(result); console.log(result)});
+    }, [])
 
+  // change state of job 'applied' field after patch request is made
+  function handleApply(appliedJob) {
+    console.log("jobs", jobs)
+    const newJobs = jobs.map((job)=> {
+      if (!appliedJob.id) {
+        return job;
+      }
+      return {...job, applied: true}; 
+    })
+    setJobs(newJobs); 
+  }
   return (
     <div>
       <NavBar />
@@ -33,17 +48,17 @@ function App() {
       </Switch>
       <Switch>
         <Route exact path='/wishlist'>
-          <Wishlist jobs={jobs} onFetch={handleFetch}/>
+          <Wishlist jobs={jobs} onApply={handleApply} />
         </Route>
       </Switch>
       <Switch>
         <Route exact path='/applied'>
-          <Applied />
+          <Applied jobs={jobs} />
         </Route>
       </Switch>
       <Switch>
         <Route exact path='/replied'>
-          <Replied />
+          <Replied jobs={jobs}/>
         </Route>
       </Switch>
     </div>
