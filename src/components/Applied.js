@@ -2,13 +2,13 @@ import { React } from 'react';
 import JobItem from './JobItem'; 
 import { Container, Stack, Spinner } from 'react-bootstrap'; 
 
-function Applied({ jobs }) {
+function Applied({ jobs, onReply }) {
     if(jobs) return (
         <Container>
         <Stack gap={3}>
            {jobs.map((job)=> {
                if (job.applied && !job.replied){
-               return <JobItem job={job} key={job.id} />
+               return <JobItem job={job} key={job.id} onReply={onReply} />
            }
            return null; 
         })}

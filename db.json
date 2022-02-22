@@ -15,7 +15,7 @@
         "SQL"
       ],
       "applied": true,
-      "replied": false
+      "replied": true
     },
     {
       "id": 2,
@@ -30,7 +30,7 @@
         "API",
         "SQL"
       ],
-      "applied": true,
+      "applied": false,
       "replied": false
     },
     {

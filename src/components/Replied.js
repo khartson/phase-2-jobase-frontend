@@ -10,8 +10,8 @@ function Replied({ jobs }) {
                if (job.replied){
                return <JobItem job={job} key={job.id} />
             }
-            return null;  
-        })}
+               return null;  
+            })}
         </Stack>
         </Container>
     )

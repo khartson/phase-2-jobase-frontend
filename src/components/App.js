@@ -29,15 +29,26 @@ function App() {
 
   // change state of job 'applied' field after patch request is made
   function handleApply(appliedJob) {
-    console.log("jobs", jobs)
     const newJobs = jobs.map((job)=> {
-      if (!appliedJob.id) {
+      if (job.id !== appliedJob.id) {
         return job;
       }
       return {...job, applied: true}; 
     })
-    setJobs(newJobs); 
+    setJobs(newJobs);
   }
+
+  // change state of job 'applied' field after patch reqeust is made
+  function handleReply(repliedJob) {
+    const newJobs = jobs.map((job)=> {
+      if (job.id !== repliedJob.id) {
+        return job;
+      }
+      return {...job, replied: true};
+    })
+    setJobs(newJobs);
+  }
+
   return (
     <div>
       <NavBar />
@@ -53,7 +64,7 @@ function App() {
       </Switch>
       <Switch>
         <Route exact path='/applied'>
-          <Applied jobs={jobs} />
+          <Applied jobs={jobs} onReply={handleReply}/>
         </Route>
       </Switch>
       <Switch>
