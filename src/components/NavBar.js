@@ -21,6 +21,9 @@ function NavBar() {
                 <LinkContainer to='/replied'>
                     <Nav.Link href="replied">Replied</Nav.Link>
                 </LinkContainer>
+                <LinkContainer to='/newjob'>
+                    <Nav.Link href="newjob">New Job</Nav.Link>
+                </LinkContainer>
             </Nav>
             <Navbar.Brand href='https://github.com/khartson'><RiGithubFill/></Navbar.Brand>
             <Navbar.Brand href='https://www.linkedin.com/in/kyle-hartson/'><RiLinkedinBoxFill/></Navbar.Brand>

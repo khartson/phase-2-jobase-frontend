@@ -4,6 +4,7 @@ import Home from './Home';
 import Wishlist from './Wishlist';
 import Applied from './Applied'; 
 import Replied from './Replied';
+import NewJobForm from './NewJobForm';
 
 // react-dom imports 
 import { Route, Switch } from 'react-router-dom';
@@ -70,6 +71,11 @@ function App() {
       <Switch>
         <Route exact path='/replied'>
           <Replied jobs={jobs}/>
+        </Route>
+      </Switch>
+      <Switch>
+        <Route exact path='/newjob'>
+          <NewJobForm />
         </Route>
       </Switch>
     </div>
