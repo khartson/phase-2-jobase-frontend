@@ -1,10 +1,17 @@
-import React from 'react';
+import { React, useState } from 'react';
 import { RiHomeLine, RiGithubFill, RiLinkedinBoxFill } from 'react-icons/ri'; 
-import { Navbar, Nav, Container } from 'react-bootstrap'; 
+import { Navbar, Nav, Container, Modal, Button } from 'react-bootstrap'; 
 import { LinkContainer } from 'react-router-bootstrap'; 
 import { Link } from 'react-router-dom';
+import NewJobForm from './NewJobForm'; 
 
 function NavBar() {
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     return(
         <Container fluid>
         <Navbar bg="light" variant="light">
@@ -21,14 +28,14 @@ function NavBar() {
                 <LinkContainer to='/replied'>
                     <Nav.Link href="replied">Replied</Nav.Link>
                 </LinkContainer>
-                <LinkContainer to='/newjob'>
-                    <Nav.Link href="newjob">New Job</Nav.Link>
-                </LinkContainer>
+                <Nav.Link onClick={handleShow}>New Job</Nav.Link>
             </Nav>
             <Navbar.Brand href='https://github.com/khartson'><RiGithubFill/></Navbar.Brand>
             <Navbar.Brand href='https://www.linkedin.com/in/kyle-hartson/'><RiLinkedinBoxFill/></Navbar.Brand>
-        </Navbar>  
+        </Navbar>
+        <NewJobForm show={show} handleClose={handleClose}/>
         </Container>
+        
     )
 }
 

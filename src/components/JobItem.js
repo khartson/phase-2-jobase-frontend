@@ -40,7 +40,7 @@ function JobItem({ job, onApply, onReply }) {
             <Card.Body>
                 <Container fluid>
                     <Row>
-                        <Col xs='auto'><RiLinkedinBoxFill/></Col>
+                        {/* <Col xs='auto'><RiLinkedinBoxFill/></Col> */}
                         <Col xs='auto'>
                             <Card.Title>{job.title}</Card.Title>
                             <Card.Subtitle>{job.company} | {job.location}</Card.Subtitle>
