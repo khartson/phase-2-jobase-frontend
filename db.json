@@ -31,7 +31,7 @@
         "SQL"
       ],
       "applied": true,
-      "replied": false
+      "replied": true
     },
     {
       "id": 3,
@@ -49,6 +49,20 @@
       ],
       "applied": true,
       "replied": true
+    },
+    {
+      "title": "Developer",
+      "company": "A Company",
+      "location": "Remote",
+      "companySite": "google.com",
+      "contactLink": "linkedin.com/name",
+      "technologies": [
+        "java",
+        "python"
+      ],
+      "applied": true,
+      "replied": true,
+      "id": 4
     }
   ]
 }

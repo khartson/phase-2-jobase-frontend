@@ -4,7 +4,6 @@ import Home from './Home';
 import Wishlist from './Wishlist';
 import Applied from './Applied'; 
 import Replied from './Replied';
-import NewJobForm from './NewJobForm';
 
 // react-dom imports 
 import { Route, Switch } from 'react-router-dom';
@@ -25,7 +24,7 @@ function App() {
   useEffect(() => {
       fetch('http://localhost:3000/jobs')
       .then(response => response.json())
-      .then(result => {setJobs(result); console.log(result)});
+      .then(result => {setJobs(result)});
     }, [])
 
   // change state of job 'applied' field after patch request is made
@@ -50,9 +49,17 @@ function App() {
     setJobs(newJobs);
   }
 
+  function handleAdd(newJob) {
+    setJobs([...jobs, newJob]); 
+  }
+
+  function handleDelete(deletedJob) {
+    const newJobs = jobs.filter((job) => job.id != deletedJob.id);
+    setJobs(newJobs); 
+  }
   return (
     <div>
-      <NavBar />
+      <NavBar onAdd={handleAdd} />
       <Switch>
         <Route exact path='/home'>
           <Home />
@@ -60,22 +67,17 @@ function App() {
       </Switch>
       <Switch>
         <Route exact path='/wishlist'>
-          <Wishlist jobs={jobs} onApply={handleApply} />
+          <Wishlist jobs={jobs} onApply={handleApply} onDelete={handleDelete} />
         </Route>
       </Switch>
       <Switch>
         <Route exact path='/applied'>
-          <Applied jobs={jobs} onReply={handleReply}/>
+          <Applied jobs={jobs} onReply={handleReply} onDelete={handleDelete}/>
         </Route>
       </Switch>
       <Switch>
         <Route exact path='/replied'>
-          <Replied jobs={jobs}/>
-        </Route>
-      </Switch>
-      <Switch>
-        <Route exact path='/newjob'>
-          <NewJobForm />
+          <Replied jobs={jobs} onDelete={handleDelete}/>
         </Route>
       </Switch>
     </div>

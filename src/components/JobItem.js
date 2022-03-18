@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Button, Container, Row, Col, Badge } from 'react-bootstrap';
 import { RiDeleteBackLine, RiLinkedinBoxFill } from 'react-icons/ri';
 import { FcCheckmark } from "react-icons/fc";
-function JobItem({ job, onApply, onReply }) {
+function JobItem({ job, onApply, onReply, onDelete }) {
     
     // onApply - patch to change applied value, set state false -> true
     function handleApplyClick(job) {
@@ -31,8 +31,12 @@ function JobItem({ job, onApply, onReply }) {
     }
 
     // onDelete - remove from state & db
-    function onDelete(job) {
-        console.log(job.id); 
+    function handleDeleteClick(job) {
+        fetch(`http://localhost:3000/jobs/${job.id}`, {
+            method: "DELETE",
+        })
+        .then((r)=>r.json())
+        .then(onDelete(job))
     }
 
     return (
@@ -50,8 +54,8 @@ function JobItem({ job, onApply, onReply }) {
                             <Card.Link href={job.companySite}>Site Link</Card.Link>
                         </Col>
                         <Col xs={2}>
-                            {job.technologies.map((tech)=> {
-                                return <> <Badge key={job.id} pill>{tech}</Badge>{' '} </>
+                            {job.technologies.map((tech, index)=> {
+                                return <React.Fragment key={index}> <Badge key={job.id} pill>{tech}</Badge>{' '} </React.Fragment>
                             })}
                         </Col>
                         <Col xs='auto'>
@@ -61,7 +65,7 @@ function JobItem({ job, onApply, onReply }) {
                             <Button disabled={job.replied || !job.applied} size='sm' variant='outline-primary' onClick={() => handleReplyClick(job)}><FcCheckmark /> {job.replied ? "Replied": "Received Reply?"}</Button>
                         </Col>
                         <Col xs='auto'>
-                            <Button className='float-right' variant="outline-secondary" onClick={()=> onDelete(job)} ><RiDeleteBackLine/></Button>
+                            <Button className='float-right' variant="outline-secondary" onClick={()=> handleDeleteClick(job)} ><RiDeleteBackLine/></Button>
                         </Col>
                     </Row>
                 </Container>

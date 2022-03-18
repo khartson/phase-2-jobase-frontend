@@ -1,22 +1,21 @@
-import { React, useState } from 'react'; 
-import {Button, Modal, Form, Row, Col, InputGroup} from 'react-bootstrap';
+import { React, Fragment, useState } from 'react'; 
+import {Button, Modal, Form, Row, Col, InputGroup, Badge} from 'react-bootstrap';
 
-function NewJobForm({ show, handleClose }) {
+function NewJobForm({ show, handleClose, handleAdd }) {
+
     const [formJob, setFormJob] = useState(
         {
             title: '',
             company: '',
             location: '',
             companySite: '',
-            contactName: '',
+            contactLink: '',
             technologies: [],
             applied: false,
             replied: false
         }
     )
-
-    const [technology, setTechnology] = useState(); 
-    
+ 
     function handleFormChange(event) {
         const category =    event.target.id;
         const input    = event.target.value;
@@ -27,8 +26,29 @@ function NewJobForm({ show, handleClose }) {
                    })
     }
 
-    function handleAddClick(event) {
-        console.log('clicked'); 
+    const [techInput, setTechInput] = useState('');
+    const [techList, setTechList]   = useState([]);
+
+    function handleAddClick() {
+        setTechList([...techList, techInput]);
+        setTechInput(''); 
+        setFormJob({
+                    ...formJob,
+                    technologies: techList
+                    })
+    }
+
+    function handleSubmit() {
+        console.log('clicked');
+        fetch('http://localhost:3000/jobs', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formJob)
+        })
+        .then((r)=>r.json())
+        .then((newJob)=>handleAdd(newJob)) // * 
     }
     return (
         <>
@@ -59,8 +79,8 @@ function NewJobForm({ show, handleClose }) {
                 <Row>
                     <Col>
                     <Form.Group>
-                        <Form.Label>Contact Name</Form.Label>
-                        <Form.Control id='contactName' value={formJob.contactName} onChange={handleFormChange}></Form.Control>
+                        <Form.Label>Contact Link</Form.Label>
+                        <Form.Control id='contactLink' value={formJob.contactLink} onChange={handleFormChange}></Form.Control>
                     </Form.Group>
                     </Col>
                     <Col>
@@ -71,17 +91,26 @@ function NewJobForm({ show, handleClose }) {
                     </Col>
                 </Row>
                 <hr/>
-                <Row>
+                <Row >
                     <Form.Group >
                         <Form.Label>Technologies</Form.Label>
                         <InputGroup className='mb-3'>
-                            <Form.Control id='technologies' value={technology} onChange={(e)=>setTechnology(e.target.value)}></Form.Control>
+                            <Form.Control id='technologies' value={techInput} onChange={(e)=>setTechInput(e.target.value)}></Form.Control>
                             <Button variant='outline-primary' onClick={handleAddClick}>Add</Button>
                         </InputGroup>
                     </Form.Group>
                 </Row>
+                <hr/>
+                <Row md='auto'>
+                    {techList.map((tech, index)=> {
+                        return(
+                            <Fragment key={index}>
+                                <Badge className='mx-1' key={index} pill>{tech}</Badge>
+                            </Fragment>
+                        )
+                    })}
+                </Row>
             </Modal.Body>
-
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
                 Close
@@ -89,7 +118,8 @@ function NewJobForm({ show, handleClose }) {
             <Button variant="primary" onClick={handleClose}>
                 Save Changes
             </Button>
-            <Button variant='outline-primary' onClick={()=>console.log(formJob, technology)}>Show state variable</Button>
+            <Button variant='outline-primary' onClick={()=>console.log(formJob, techInput)}>Show state variable</Button>
+            <Button variant='outline-secondary' onClick={handleSubmit}>Submit</Button>
             </Modal.Footer>
         </Modal>
         </>

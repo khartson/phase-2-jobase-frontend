@@ -5,7 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Link } from 'react-router-dom';
 import NewJobForm from './NewJobForm'; 
 
-function NavBar() {
+function NavBar({ onAdd }) {
 
     const [show, setShow] = useState(false);
 
@@ -33,7 +33,7 @@ function NavBar() {
             <Navbar.Brand href='https://github.com/khartson'><RiGithubFill/></Navbar.Brand>
             <Navbar.Brand href='https://www.linkedin.com/in/kyle-hartson/'><RiLinkedinBoxFill/></Navbar.Brand>
         </Navbar>
-        <NewJobForm show={show} handleClose={handleClose}/>
+        <NewJobForm show={show} handleClose={handleClose} handleAdd={onAdd}/>
         </Container>
         
     )
