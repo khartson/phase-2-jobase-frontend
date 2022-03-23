@@ -1,21 +1,31 @@
 import { React, useState } from 'react';
 import { RiHomeLine, RiGithubFill, RiLinkedinBoxFill } from 'react-icons/ri'; 
-import { Navbar, Nav, Container, Modal, Button } from 'react-bootstrap'; 
+import { Navbar, Nav, Container } from 'react-bootstrap'; 
 import { LinkContainer } from 'react-router-bootstrap'; 
-import { Link } from 'react-router-dom';
 import NewJobForm from './NewJobForm'; 
 
+// NavBar - child of App.js - bar that navigates the routes for each tab of
+//          of the application, as well as rendering the NewJobForm modal,
+//          + my networking icons :) 
+// onAdd - App.js - will handle state update for list of jobs when user
+//         submits a new job application via 'New Job' modal
 function NavBar({ onAdd }) {
 
+    // show, setShow - state variables that will toggle display of the
+    // NewJobForm modal, wherein users can add a new job application
     const [show, setShow] = useState(false);
 
+    // handleClose, handleShow - togglevalue of 'show' state to display or hide
+    // job application form 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    // NavBar handles react-router redirects, which will then be rendered via
+    // URL in App.js
     return(
         <Container fluid>
         <Navbar bg="light" variant="light">
-            <LinkContainer to='/home'>
+            <LinkContainer to='/'>
                 <Navbar.Brand><RiHomeLine/></Navbar.Brand>
             </LinkContainer>
             <Nav className="me-auto">

@@ -51,14 +51,14 @@
       "replied": true
     },
     {
-      "title": "Developer",
-      "company": "A Company",
-      "location": "Remote",
-      "companySite": "google.com",
-      "contactLink": "linkedin.com/name",
+      "title": "Backend Developer",
+      "company": "Infosys",
+      "location": "Dayton, OH",
+      "companySite": "infosys.com",
+      "contactLink": "linkedin.com",
       "technologies": [
-        "java",
-        "python"
+        "python",
+        "tensorflow"
       ],
       "applied": true,
       "replied": true,
